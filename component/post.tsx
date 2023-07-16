@@ -2,14 +2,15 @@ import { PostModel, CommentModel } from "@/lib/model";
 import CommentField from "./commentField";
 import CommentCard from "./comment";
 
-export default function PostCard({ data } : {data:PostModel}) {
-    const addComment =()=>{
-        data.comment.push({} as CommentModel);
-    }
+export default function PostCard({ data ,updateData} : {data:PostModel, updateData:any}) {
+    // const addComment =()=>{
+    //     data.comment.push({} as CommentModel);
+    // }
+
     return (
-        <div className="max-w-sm rounded overflow-hidden shadow-lg">
+        <div className="rounded overflow-hidden">
             <div className="px-6 py-4">
-                <div className="font-bold text-xl mb-2">{data.username}</div>
+                <div className="font-bold text-xl mb-2">{data.username} says</div>
                 <p className="text-gray-700 text-base">
                     {data.message}
                 </p>
@@ -19,9 +20,9 @@ export default function PostCard({ data } : {data:PostModel}) {
                 
 
                 {data.comment.length != 0 ? 
-                data.comment.map(comment => {                        
+                data.comment.map((comment,i) => {                        
                     return (
-                        <div className="comment">
+                        <div className="comment" key={"comment-"+i}>
                             <CommentCard data={comment}/>
                         </div>
                     );
@@ -35,7 +36,7 @@ export default function PostCard({ data } : {data:PostModel}) {
 
             <div className="px-6 pt-4 pb-2 div-comments">
                 <div className="comment">
-                    <CommentField postId={data.id}/>
+                    <CommentField postId={data.id} updateData={updateData}/>
                 </div>
             </div>
         </div>

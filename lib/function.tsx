@@ -4,7 +4,7 @@ import _uniqueId from 'lodash/uniqueId';
 
 
 export function getUsername(){
-    let data = localStorage.getItem("username")
+    let data = localStorage.getItem("usn")
     
     if(!data){
         localStorage.setItem("usn", _uniqueId('anon-'))

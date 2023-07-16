@@ -3,10 +3,10 @@ React JS with Social App post anonymous and comment.
 
 
 This is an social media application that can post a text information to internet anonymously and let the community engage that post, we will call it Postr
-The app have 3 screens:
-1. Timeline or newsfeed screen
+The app have 2 screens:
+1. Timeline or newsfeed with Reply to a post screen
 2. Create a new post screen
-3. Reply to a post screen
+3. Language screen
 
 The app have following abilities:
 1. Every user will have unique and random handler (username)
@@ -14,7 +14,11 @@ The app have following abilities:
 3. Reply users’ posts with maximum character length: 100
 4. List all users’ newest posts with infinite scroll capabilities
 5. User can change UI language into several languages
+6. Check Connectivity
+7. User Location (Lan & Lon)
 
+Note : 
+Infinite post can uncomment fetchData on pagelist. It's will only repeating the post has been made. Due to no mock API in this application.
 
 -----
 

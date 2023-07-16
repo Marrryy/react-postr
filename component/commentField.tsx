@@ -1,11 +1,12 @@
 import { postComment } from "@/lib/function";
 import { CommentModel } from "@/lib/model";
-import { useState } from "react";
+import { FunctionComponent, useState } from "react";
 import _uniqueId from 'lodash/uniqueId';
 
-export default function CommentField({ postId } : {postId:string}) {
+export interface CommentFieldArgs {postId:string, updateData:any}
+const CommentField:FunctionComponent<CommentFieldArgs>=({ postId, updateData } ) => {
     const [message, setMessage] = useState("");
-    const [id] = useState(_uniqueId('prefix-'));
+    const [id] = useState(_uniqueId('cid-'));
 
     const handleSubmit = async (event:any) => {
         // Stop the form from submitting and refreshing the page.
@@ -22,6 +23,7 @@ export default function CommentField({ postId } : {postId:string}) {
         }
         postComment(newData);
         setMessage("");
+        updateData(postId)
     }
     return (
         <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" onSubmit={handleSubmit}>
@@ -41,3 +43,4 @@ export default function CommentField({ postId } : {postId:string}) {
     );
 }
   
+export default CommentField;

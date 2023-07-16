@@ -12,7 +12,9 @@ export default function Post() {
   const router = useRouter()
 
   const [message, setMessage] = useState("");
-  const [id] = useState(_uniqueId('uuid-'));
+  const [id] = useState(_uniqueId('pid-'));
+  const [location, setLocation] = useState();
+  const [online, setOnline] = useState("");
 
   const handleSubmit = async (event:any) => {
     // Stop the form from submitting and refreshing the page.
@@ -31,12 +33,30 @@ export default function Post() {
 
     router.push("/")
   }
+  
+  if('geolocation' in navigator) {
+    // Retrieve latitude & longitude coordinates from `navigator.geolocation` Web API
+    navigator.geolocation.getCurrentPosition(({ coords }) => {
+        const { latitude, longitude } = coords;
+        setLocation({ latitude, longitude });
+    })
+  }
+  if((navigator.onLine && online != "Online") ||
+   (!navigator.onLine  && online !="Offline")){
+    setOnline(navigator.onLine?"Online":"Offline")
+  }
 
   return (
     <div>
 
       <h1 className="mb-4 text-3xl font-extrabold leading-none tracking-tight text-gray-900 md:text-4xl lg:text-5xl text-blue-600 dark:text-blue-500">Create a new post.</h1>
         
+        <h3>
+          Your Location.
+        </h3>
+        <p>Long :{(location&&location.longitude)??"Please Allow Location"}, Lat{(location&&location.latitude)??"Please Allow Location"}</p>
+        <p>Your Connectivity : {online}</p>
+
       <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" onSubmit={handleSubmit}>
         <div className="mb-6">
           <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="message">
